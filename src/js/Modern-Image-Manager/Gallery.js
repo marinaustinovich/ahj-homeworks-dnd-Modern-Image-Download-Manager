@@ -79,7 +79,9 @@ export default class Gallery {
   }
 
   onChange(e) {
+    console.log(e.target)
     const data = e.target.files[0];
+    console.log(data);
     const reader = new FileReader();
 
     if (data.type.startsWith('image/')) {
@@ -91,7 +93,7 @@ export default class Gallery {
       reader.readAsDataURL(data);
     } else {
       reader.onload = (event) => {
-        document.querySelector('.file-container').appendChild(document.createTextNode(event.target.result));
+        document.querySelector('.gallery-container').appendChild(document.createTextNode(event.target.result));
       };
       reader.readAsText(data);
     }

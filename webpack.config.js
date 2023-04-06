@@ -17,8 +17,21 @@ module.exports = {
     clean: true,
   },
   entry: './src/index.js',
+  experiments: {
+    topLevelAwait: true
+  },
+  resolve: {
+    extensions: ['.js', '.pdf']
+  },
   module: {
     rules: [
+      {
+        test: /\.pdf$/i,
+        type: 'asset/resource',
+        generator: {
+            filename: `[name][ext]`
+        }
+    },
       {
         test: /\.txt/,
         type: 'asset',

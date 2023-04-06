@@ -13,7 +13,7 @@ export default function createImageBlock(data, containerEl) {
     <button type="button" class="btn-close">
       <span class="sr-only">Close</span>
       <span class="span-close" aria-hidden="true">×</span>
-      </button>
+    </button>
   `;
 
   const btnClose = imageBLock.querySelector('.btn-close');
