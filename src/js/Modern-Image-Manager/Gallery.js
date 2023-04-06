@@ -79,9 +79,7 @@ export default class Gallery {
   }
 
   onChange(e) {
-    console.log(e.target)
     const data = e.target.files[0];
-    console.log(data);
     const reader = new FileReader();
 
     if (data.type.startsWith('image/')) {

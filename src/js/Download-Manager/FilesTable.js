@@ -61,11 +61,11 @@ export default class FilesTable {
 
     const weightSumm = document.getElementById('weghts-summ');
     weightSumm.innerText = +weightSumm.innerText + +e.target.dataset.weight;
-        
+
     const iframeField = this.container.querySelector('.iframe-block');
     const iframeFile = document.createElement('iframe');
     iframeFile.src = e.target.href;
-    iframeField.append(iframeFile)
+    iframeField.append(iframeFile);
 
     const btnClose = document.createElement('button');
     btnClose.type = 'button';
@@ -74,11 +74,11 @@ export default class FilesTable {
       <span class="sr-only">Close</span>
       <span class="span-close" aria-hidden="true">×</span>
     `;
-    
+
     btnClose.addEventListener('click', () => {
       iframeFile.parentNode.removeChild(iframeFile);
-      btnClose.parentNode.removeChild(btnClose)
+      btnClose.parentNode.removeChild(btnClose);
     });
-    iframeField.append(btnClose)
+    iframeField.append(btnClose);
   }
 }

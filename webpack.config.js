@@ -18,10 +18,10 @@ module.exports = {
   },
   entry: './src/index.js',
   experiments: {
-    topLevelAwait: true
+    topLevelAwait: true,
   },
   resolve: {
-    extensions: ['.js', '.pdf']
+    extensions: ['.js', '.pdf'],
   },
   module: {
     rules: [
@@ -29,9 +29,9 @@ module.exports = {
         test: /\.pdf$/i,
         type: 'asset/resource',
         generator: {
-            filename: `[name][ext]`
-        }
-    },
+          filename: '[name][ext]',
+        },
+      },
       {
         test: /\.txt/,
         type: 'asset',

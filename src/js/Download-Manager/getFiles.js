@@ -1,11 +1,11 @@
-import filePathStorage   from '../../files/Storage_Standard.pdf';
-import filePathStreams   from '../../files/Streams Standard.pdf';
-import filePathXMLHttpRequest   from '../../files/XMLHttpRequest_Standard.pdf';
+import filePathStorage from '../../files/Storage_Standard.pdf';
+import filePathStreams from '../../files/Streams Standard.pdf';
+import filePathXMLHttpRequest from '../../files/XMLHttpRequest_Standard.pdf';
 
-let responseStorage = await fetch(filePathStorage);
-let responseStreams = await fetch(filePathStreams);
-let responseXMLHttpRequest = await fetch(filePathXMLHttpRequest);
-
+const responseStorage = await fetch(filePathStorage);
+const responseStreams = await fetch(filePathStreams);
+const responseXMLHttpRequest = await fetch(filePathXMLHttpRequest);
+/* eslint-disable */
 export default function getFiles() {
   if (responseStorage && responseStreams && responseXMLHttpRequest) {
     return [
@@ -29,7 +29,4 @@ export default function getFiles() {
       },
     ];
   }
-};
-
-
-
+}
