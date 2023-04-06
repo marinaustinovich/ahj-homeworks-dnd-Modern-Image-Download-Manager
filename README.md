@@ -1,5 +1,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/m3symfqjwj8dkl8w/branch/main?svg=true)](https://ci.appveyor.com/project/marinaustinovich/ahj-homeworks-dnd-modern-image-download-manager/branch/main)
 
+deployment: https://marinaustinovich.github.io/ahj-homeworks-dnd-Modern-Image-Download-Manager/
+
 ### Modern Image Manager
 
 #### Легенда
