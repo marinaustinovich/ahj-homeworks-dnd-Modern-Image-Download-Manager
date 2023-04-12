@@ -59,18 +59,18 @@ body {
 
 .overlapped {
   position: absolute;
-  top: 0; 
-  left: 0; 
-  bottom: 0; 
-  right: 0; 
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   margin: 0;
   opacity: 0;
   width: 100%;
 }
-  
+
 .overlap {
   position: absolute;
-  top: 0; 
+  top: 0;
   left: 0;
   bottom: 0;
   right: 0;
@@ -81,10 +81,10 @@ body {
 }
 
 input[type="text"], input[type="url"] {
-  font-family: inherit; 
-  font-size: inherit; 
-  line-height: inherit; 
-  margin: 0; 
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
 }
 
 /* стили для label */
@@ -138,18 +138,18 @@ input[type="text"], input[type="url"] {
   box-shadow: 2px 2px 4px #d98989;
 }
 
-.error-url:before { 
-	content: ' '; 
-	position: absolute; 
-	width: 0; 
-	height: 0; 
-	right: 34px; 
+.error-url:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	right: 34px;
   bottom: 41px;
-	border: 13px solid; 
-	border-color: transparent  #b93d3d  #b93d3d transparent; 
+	border: 13px solid;
+	border-color: transparent  #b93d3d  #b93d3d transparent;
 }
 
-.error-url:after { 
+.error-url:after {
 	content: " ";
     position: absolute;
     width: 0;
@@ -157,7 +157,7 @@ input[type="text"], input[type="url"] {
     right: 37px;
     bottom: 43px;
     border: 9px solid;
-	border-color: transparent #fff #fff transparent; 
+	border-color: transparent #fff #fff transparent;
 }
 
 .hidden {
@@ -281,5 +281,16 @@ iframe {
 @media (max-width: 768px) {
   .gallery-field-wrapper {
     flex-wrap: wrap;
+  }
+
+  .gallery-field {
+    min-height: 150px;
+  }
+.gallery-field_form {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+  .overlap {
+    font-size: 1.5rem;
   }
 }
