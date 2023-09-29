@@ -1,17 +1,18 @@
-import createImageBlock from './createImageBlock';
-import isValidUrl from './isValidUrl';
-import Picture from './Picture';
+import ImageBlock from "./ImageBlock/ImageBlock";
+import Picture from "./Picture";
+import "./gallery.css";
 
 export default class Gallery {
   constructor() {
     this.container = null;
     this.images = [];
     this.list = null;
+    this.previewImage = null;
   }
 
   bindToDOM(container) {
     if (!(container instanceof HTMLElement)) {
-      throw new Error('container is not HTMLElement');
+      throw new Error("container is not HTMLElement");
     }
     this.container = container;
 
@@ -20,80 +21,59 @@ export default class Gallery {
 
   checkBinding() {
     if (this.container === null) {
-      throw new Error('Gallery not bind to DOM');
+      throw new Error("Gallery not bind to DOM");
     }
   }
 
   drawUi() {
     this.checkBinding();
     this.container.innerHTML = `
-    <div class="gallery-field-wrapper">
-      <div class="gallery-field gallery-field_form">
-            <form name="imageForm">
-              <div class="title-wrapper">
-                <label class="title title_label" for="name-image">Название</label>
-                <input class="gallery-field__input" data-id="image" type="text" name="name" placeholder="Enter title of your picture" autocomplete="off" required>
-              </div>
-                
-              <div class="title-wrapper">
-                <label class="title title_label" for="url-image">Ссылка на изображение</label>
-                <input class="gallery-field__input" type="url" name="url" placeholder="//johndoe.png|webp|avif|gif|svg" autocomplete="off" required pattern="(https?://.*.(png|webp|avif|gif|svg)$)">
-              </div>
-              <div class="error-url hidden">Неверный URL изображения</div>
-              <button class="btn-add" type="submit">Добавить</button>
-            </form>
-            
-          </div>
-          <div class="gallery-field">
-            <input data-id="file" class="overlapped" type="file" accept="image/*">
-            <span data-id="overlap" class="title overlap">Drag and Drop files here <br> or Click to select</span>
-          </div>
-    </div>
-    <div class="gallery-list"></div>
+      <div class="gallery-field">
+        <input data-id="file" class="overlapped" type="file" accept="image/*">
+        <div data-id="overlap" class="title overlap">Drag and Drop files here or Click to select</div>
+      </div>
+      <div class="gallery-list"></div>
+      <div class='error hidden'>It's no Picture!</div>
       `;
-    this.list = document.querySelector('.gallery-list');
+    this.list = this.container.querySelector(".gallery-list");
+    this.fileInput = this.container.querySelector("[data-id=file]");
+    this.galleryFieldEl = this.container.querySelector(".gallery-field");
+
     this.events();
   }
 
   events() {
-    const btn = document.querySelector('.btn-add');
-    const fileEl = document.querySelector('[data-id=file]');
-    const overlapEl = document.querySelector('[data-id=overlap]');
-    btn.addEventListener('click', () => this.addImage());
-    overlapEl.addEventListener('click', () => fileEl.dispatchEvent(new MouseEvent('click')));
-    fileEl.addEventListener('change', (e) => this.onChange(e));
+    this.galleryFieldEl.addEventListener("click", (e) => {
+      if (e.target !== this.fileInput) {
+        this.fileInput.dispatchEvent(new MouseEvent("click"));
+      }
+    });
+    this.fileInput.addEventListener("change", () => this.onChange());
   }
 
-  async addImage() {
-    const formData = document.forms.imageForm;
-    const url = formData.url.value;
-    const name = formData.name.value;
+  onChange() {
+    const file = this.fileInput.files && this.fileInput.files[0];
+    if (!file) return;
+    if (file.type.startsWith("image/")) {
+      const blobUrl = URL.createObjectURL(file);
 
-    if (url !== '' && isValidUrl(url)) {
-      const image = new Picture(name, url, Date.now());
+      const image = new Picture(file.name, blobUrl, Date.now());
       this.images.push(image);
-
-      createImageBlock(image, this.list);
-      formData.reset();
+      this.addImage(image);
+    } else {
+      console.log("no picture");
     }
+    this.fileInput.value = null;
   }
 
-  onChange(e) {
-    const data = e.target.files[0];
-    const reader = new FileReader();
+  addImage(data) {
+    const imageBlock = new ImageBlock(data, Gallery.showError.bind(this));
+    this.list.appendChild(imageBlock.element);
+  }
 
-    if (data.type.startsWith('image/')) {
-      reader.onload = (event) => {
-        const image = new Picture(data.name, event.target.result, Date.now());
-        this.images.push(image);
-        createImageBlock(image, this.list);
-      };
-      reader.readAsDataURL(data);
-    } else {
-      reader.onload = (event) => {
-        document.querySelector('.gallery-container').appendChild(document.createTextNode(event.target.result));
-      };
-      reader.readAsText(data);
-    }
+  static showError() {
+    const container = document.querySelector(".gallery-container");
+    const errorEl = container.querySelector(".error");
+    errorEl.classList.remove("hidden");
   }
 }

@@ -1,4 +1,5 @@
 import getFiles from './getFiles';
+import './files-table.css';
 
 export default class FilesTable {
   constructor() {
@@ -20,8 +21,8 @@ export default class FilesTable {
       <div class="table-field">
         <div class="title title-file">Avialable files (without sms and registration):</div>
       </div>
-      <div class="title title-file">You have already downloaded: <span id="weghts-summ">0</span> Mb</div>
-      <div class="iframe-block"></div>
+      <div class="title title-file">You have already downloaded: <span id="weight-sum">0</span> Mb</div>
+      <div class="iframe-list"></div>
       `;
 
     getFiles().forEach((file) => this.createFile(file));
@@ -59,26 +60,33 @@ export default class FilesTable {
   download(e) {
     e.preventDefault();
 
-    const weightSumm = document.getElementById('weghts-summ');
-    weightSumm.innerText = +weightSumm.innerText + +e.target.dataset.weight;
+    const weightSum = document.getElementById('weight-sum');
+    weightSum.innerText = +weightSum.innerText + +e.target.dataset.weight;
 
-    const iframeField = this.container.querySelector('.iframe-block');
+    const iframeField = this.container.querySelector('.iframe-list');
+
+    const containerDiv = document.createElement('div');
+    containerDiv.classList.add('iframe');
+
     const iframeFile = document.createElement('iframe');
     iframeFile.src = e.target.href;
-    iframeField.append(iframeFile);
+    containerDiv.appendChild(iframeFile);
 
     const btnClose = document.createElement('button');
     btnClose.type = 'button';
     btnClose.classList.add('btn-close');
     btnClose.innerHTML = `
-      <span class="sr-only">Close</span>
-      <span class="span-close" aria-hidden="true">×</span>
+        <div class='preview-file'>
+          <span class="sr-only">Close</span>
+          <span class="span-close" aria-hidden="true">×</span>
+        </div>
     `;
 
     btnClose.addEventListener('click', () => {
-      iframeFile.parentNode.removeChild(iframeFile);
-      btnClose.parentNode.removeChild(btnClose);
+      iframeField.removeChild(containerDiv);
     });
-    iframeField.append(btnClose);
-  }
+
+    containerDiv.appendChild(btnClose);
+    iframeField.appendChild(containerDiv);
+}
 }
