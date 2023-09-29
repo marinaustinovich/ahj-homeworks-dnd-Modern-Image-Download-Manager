@@ -1,6 +1,6 @@
 {
   "name": "Modern-Image-Download-Manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "two tasks about Drag'n'Drop",
   "main": "index.js",
   "scripts": {

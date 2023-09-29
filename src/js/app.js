@@ -9,6 +9,3 @@ gallery.bindToDOM(document.querySelector('.gallery-container'));
 
 const filesTable = new FilesTable();
 filesTable.bindToDOM(document.querySelector('.download-container'));
-
-
-
