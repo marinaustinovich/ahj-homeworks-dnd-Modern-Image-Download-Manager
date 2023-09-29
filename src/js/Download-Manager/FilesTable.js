@@ -88,5 +88,5 @@ export default class FilesTable {
 
     containerDiv.appendChild(btnClose);
     iframeField.appendChild(containerDiv);
-}
+  }
 }

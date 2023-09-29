@@ -37,9 +37,7 @@ export default class ImageBlock {
         this.element.remove();
       });
     }
-    imgElement.addEventListener("load", () =>
-      console.log("Image loaded successfully!")
-    );
+    imgElement.addEventListener("load", () => console.log('Image loaded successfully!'));
   }
 
   static openImageInNewWindow(url) {
